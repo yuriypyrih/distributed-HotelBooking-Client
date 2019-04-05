@@ -14,8 +14,8 @@ public class Application {
 	Application(){
 		
 		
-		
-		new Window(WIDTH, HEIGHT,"Hotel Booking Application");
+		Manager manager = new Manager();
+		new Window(WIDTH, HEIGHT,"Hotel Booking Application", manager);
 		 
 		 System.out.println("Application Started");
 	}
