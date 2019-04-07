@@ -1,8 +1,13 @@
+package client_package;
+//ICSD16157 YURIY PYRIH
+//DISTRIBUTED SYSTEMS LAB_2
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Application {
 	
@@ -11,13 +16,14 @@ public class Application {
 	
 	public static final int WIDTH = 900, HEIGHT = WIDTH / 12 * 9; 
 	
-	Application(){
+	Application(ObjectInputStream instream,ObjectOutputStream outstream){
 		
 		
-		Manager manager = new Manager();
+		
+		ClientManager manager = new ClientManager( instream, outstream);
 		new Window(WIDTH, HEIGHT,"Hotel Booking Application", manager);
 		 
-		 System.out.println("Application Started");
+	
 	}
 
 	

@@ -1,9 +1,16 @@
+package client_package;
+//ICSD16157 YURIY PYRIH
+//DISTRIBUTED SYSTEMS LAB_2
+
+
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.swing.JOptionPane;
 
-public class Reservation {
-
+public class Reservation implements Serializable {
+	
+	private static final long serialVersionUID = -1442798787354930462L;
 	private String uniqueID;
 	private String str_first_name;
 	private String str_last_name;
@@ -22,7 +29,7 @@ public class Reservation {
 		this.str_room_type = str_room_type;
 		this.breakfast = breakfast;
 		
-		 JOptionPane.showMessageDialog(null,"Reservation added succesfully.");
+		 
 	}
 	
 	public String toString() {

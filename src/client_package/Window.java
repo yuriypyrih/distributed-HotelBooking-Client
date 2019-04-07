@@ -1,3 +1,8 @@
+package client_package;
+//ICSD16157 YURIY PYRIH
+//DISTRIBUTED SYSTEMS LAB_2
+
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
@@ -6,6 +11,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,9 +29,6 @@ import javax.swing.JTextField;
 
 
 
-//ICSD16157 YURIY PYRIH
-//DISTRIBUTED SYSTEMS LAB_2
-
 
 
 
@@ -33,7 +36,7 @@ import javax.swing.JTextField;
 public class Window extends JFrame implements ActionListener {
 	
 	private static final long serialVersionUID = -8255319694373975038L;
-	private Manager manager;
+	private ClientManager manager;
 
 	GridBagConstraints c = new GridBagConstraints();
 	CardLayout card_layout = new CardLayout();
@@ -58,7 +61,7 @@ public class Window extends JFrame implements ActionListener {
 	
 	
 	//Constructor of Window
-	public Window(int width, int height, String title, Manager manager) {
+	public Window(int width, int height, String title, ClientManager manager) {
 		
 			
 				this.manager = manager;
@@ -134,8 +137,13 @@ public class Window extends JFrame implements ActionListener {
 				btn_sumbit = new JButton("Sumbit");
 				btn_sumbit.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent e) {
-		            	manager.addObject(new Reservation(tf_first_name.getText(), tf_last_name.getText(), tf_phonenumber.getText(), tf_date_arrival.getText(),
-		            			comboboxRoom.getSelectedItem().toString(), btn_include_breakast.isSelected()));
+		            	try {
+							manager.addObject(new Reservation(tf_first_name.getText(), tf_last_name.getText(), tf_phonenumber.getText(), tf_date_arrival.getText(),
+									comboboxRoom.getSelectedItem().toString(), btn_include_breakast.isSelected()));
+						} catch (IOException | ClassNotFoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 		            	clearInput();
 		            }
 		        });
@@ -197,7 +205,7 @@ public class Window extends JFrame implements ActionListener {
 				//View card
 				
 				tf_search = new JTextField(15);
-				String[] str_comboboxSearch = { "Show ALL","Name of costumer"};
+				String[] str_comboboxSearch = { "Show ALL","Name of customer"};
 				
 				comboboxSearch = new JComboBox(str_comboboxSearch);
 				comboboxSearch.setSelectedIndex(combobox_index);
@@ -206,12 +214,22 @@ public class Window extends JFrame implements ActionListener {
 				btn_search.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent e) {
 		            	if(comboboxSearch.getSelectedIndex() == 0) {
-		            		textarea_view.setText(manager.getAllList());
+		            		try {
+								textarea_view.setText(manager.getAllList());
+							} catch (ClassNotFoundException | IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 		            	}
 		            	else if(comboboxSearch.getSelectedIndex() == 1) {
 		            		
 		            		String name = tf_search.getText();
-		            		textarea_view.setText(manager.getByNameList(name));
+		            		try {
+								textarea_view.setText(manager.getByNameList(name));
+							} catch (ClassNotFoundException | IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 		            	}
 		            	
 		            	clearInput();
@@ -245,7 +263,12 @@ public class Window extends JFrame implements ActionListener {
 				btn_remove = new JButton("Remove");
 				btn_remove.addActionListener(new ActionListener() {
 		            public void actionPerformed(ActionEvent e) {
-		            	manager.removeObject(tf_remove.getText());
+		            	try {
+							manager.removeObject(tf_remove.getText());
+						} catch (ClassNotFoundException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 		            	clearInput();
 		            }
 		        });
